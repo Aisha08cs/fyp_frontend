@@ -105,7 +105,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const register = async (userData: User | CaregiverForm) => {
     try {
       const path = userData.userType === 'caregiver' ? '/registerCaregiver' : '/registerPatient';
-      await apiClient.post(path, userData);
+      console.log('Registering user:', userData);
+      console.log('path',path)
+      await apiClient.post(`auth/${path}`, userData);
 
       // Automatically log in after successful registration
       await login({ email: userData.email, password: userData.password });
